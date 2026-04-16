@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="pt" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3DStore — Master Infoprod VIP</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange: #FF6600;
+  --orange2: #FF4500;
+  --orange-light: #FF8C00;
+  --yellow: #FFD700;
+  --red: #E53935;
+  --green: #00C853;
+  --bg: #F5F5F5;
+  --bg2: #FFFFFF;
+  --bg3: #EFEFEF;
+  --card: #FFFFFF;
+  --text: #1A1A1A;
+  --text2: #555;
+  --border: #E0E0E0;
+  --shadow: 0 2px 12px rgba(0,0,0,0.10);
+  --nav-bg: #FFFFFF;
+  --badge-sale: #E53935;
+  --badge-hot: #FF6600;
+  --input-bg: #F9F9F9;
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+[data-theme="dark"] {
+  --bg: #121212;
+  --bg2: #1A1A1A;
+  --bg3: #242424;
+  --card: #1E1E1E;
+  --text: #F0F0F0;
+  --text2: #AAAAAA;
+  --border: #333;
+  --shadow: 0 2px 12px rgba(0,0,0,0.40);
+  --nav-bg: #1A1A1A;
+  --input-bg: #252525;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
+  min-height: 100vh;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  background: var(--orange);
+  color: white;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+  padding: 5px 16px;
+  letter-spacing: 0.3px;
+}
+.topbar span { opacity: 0.92; }
+
+/* ── NAV ── */
+nav {
+  background: var(--nav-bg);
+  border-bottom: 2px solid var(--orange);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow);
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  gap: 12px;
+}
+.logo {
+  font-family: 'Baloo 2', cursive;
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--orange);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+  flex-shrink: 0;
+}
+.logo span { color: var(--text); }
+
+.search-wrap {
+  flex: 1;
+  max-width: 520px;
+  display: flex;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 2px solid var(--orange);
+  background: var(--input-bg);
+}
+.search-wrap input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 9px 16px;
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
+  color: var(--text);
+  outline: none;
+}
+.search-wrap button {
+  background: var(--orange);
+  border: none;
+  color: white;
+  padding: 0 18px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.search-wrap button:hover { background: var(--orange2); }
+
+.nav-actions { display: flex; align-items: center; gap: 10px; margin-left: auto; }
+
+.theme-toggle {
+  background: var(--bg3);
+  border: none;
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s;
+  color: var(--text);
+}
+.theme-toggle:hover { background: var(--border); }
+
+.cart-btn {
+  background: var(--orange);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-weight: 800;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  transition: background 0.2s;
+}
+.cart-btn:hover { background: var(--orange2); }
+.cart-count {
+  background: var(--red);
+  color: white;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 1px 6px;
+  min-width: 20px;
+  text-align: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.nav-links a {
+  color: var(--text2);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 999px;
+  transition: all 0.2s;
+}
+.nav-links a:hover { color: var(--orange); background: var(--bg3); }
+
+/* ── HERO BANNER ── */
+.hero {
+  background: linear-gradient(120deg, var(--orange) 0%, #FF8C00 40%, #FFD700 100%);
+  padding: 40px 16px 36px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(8px);
+  color: white;
+  font-weight: 800;
+  font-size: 12px;
+  border-radius: 999px;
+  padding: 4px 14px;
+  margin-bottom: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.hero h1 {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(26px, 5vw, 48px);
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  margin-bottom: 8px;
+  line-height: 1.1;
+}
+.hero p {
+  color: rgba(255,255,255,0.9);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.hero-cta {
+  background: white;
+  color: var(--orange);
+  border: none;
+  border-radius: 999px;
+  padding: 13px 32px;
+  font-size: 16px;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  transition: transform 0.15s, box-shadow 0.15s;
+  font-family: 'Nunito', sans-serif;
+}
+.hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.20); }
+
+/* ── CATEGORIES ── */
+.categories {
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 16px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.categories-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  gap: 4px;
+  padding: 10px 0;
+}
+.cat-btn {
+  background: none;
+  border: none;
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--text2);
+  transition: all 0.2s;
+  white-space: nowrap;
+  font-family: 'Nunito', sans-serif;
+}
+.cat-btn.active, .cat-btn:hover {
+  background: var(--orange);
+  color: white;
+}
+
+/* ── FLASH SALE TIMER ── */
+.flash-sale {
+  background: var(--red);
+  color: white;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-weight: 800;
+  font-size: 14px;
+  flex-wrap: wrap;
+}
+.timer-blocks { display: flex; gap: 6px; align-items: center; }
+.timer-block {
+  background: rgba(0,0,0,0.25);
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 18px;
+  font-weight: 900;
+  min-width: 36px;
+  text-align: center;
+  font-family: monospace;
+}
+.timer-sep { font-size: 18px; font-weight: 900; animation: blink 1s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+/* ── MAIN LAYOUT ── */
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+}
+
+.section-title {
+  font-family: 'Baloo 2', cursive;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 2px;
+  background: var(--border);
+  margin-left: 8px;
+}
+
+/* ── PRODUCT GRID ── */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.product-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  position: relative;
+}
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.14);
+}
+
+.product-img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: linear-gradient(135deg, #FF6600 0%, #FFD700 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 56px;
+}
+
+.product-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--red);
+  color: white;
+  font-size: 11px;
+  font-weight: 900;
+  border-radius: 999px;
+  padding: 2px 9px;
+  text-transform: uppercase;
+}
+.product-badge.hot { background: var(--orange); }
+.product-badge.new { background: var(--green); }
+
+.wishlist-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.2s;
+}
+.wishlist-btn:hover { transform: scale(1.15); }
+
+.product-info {
+  padding: 10px 12px 12px;
+}
+.product-name {
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.35;
+  margin-bottom: 6px;
+  color: var(--text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.product-rating {
+  color: var(--yellow);
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+.product-rating span { color: var(--text2); font-size: 11px; }
+.product-prices {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.price-main {
+  color: var(--orange);
+  font-size: 18px;
+  font-weight: 900;
+  font-family: 'Baloo 2', cursive;
+}
+.price-old {
+  color: var(--text2);
+  font-size: 12px;
+  text-decoration: line-through;
+}
+.price-off {
+  background: #FFF3E0;
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 800;
+  border-radius: 999px;
+  padding: 1px 6px;
+}
+[data-theme="dark"] .price-off { background: #3A2A10; }
+
+.add-cart-btn {
+  width: 100%;
+  background: var(--orange);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 8px;
+  font-weight: 800;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-family: 'Nunito', sans-serif;
+}
+.add-cart-btn:hover { background: var(--orange2); }
+
+/* ── STATS BAR ── */
+.stats-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 12px;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.stat-num {
+  font-family: 'Baloo 2', cursive;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--orange);
+  line-height: 1;
+}
+.stat-label { font-size: 12px; color: var(--text2); font-weight: 600; margin-top: 4px; }
+
+/* ── RANKING ── */
+.ranking-table {
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: 32px;
+}
+.ranking-table table { width: 100%; border-collapse: collapse; }
+.ranking-table th {
+  background: var(--orange);
+  color: white;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: left;
+}
+.ranking-table td { padding: 11px 16px; font-size: 13px; border-bottom: 1px solid var(--border); color: var(--text); }
+.ranking-table tr:last-child td { border-bottom: none; }
+.ranking-table tr:nth-child(even) td { background: var(--bg3); }
+.rank-medal { font-size: 18px; }
+
+/* ── CHECKOUT ── */
+.checkout-section {
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  margin-bottom: 32px;
+}
+.form-row { margin-bottom: 14px; }
+.form-row label { display: block; font-size: 13px; font-weight: 700; color: var(--text2); margin-bottom: 5px; }
+.form-row input, .form-row select {
+  width: 100%;
+  background: var(--input-bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.form-row input:focus, .form-row select:focus { border-color: var(--orange); }
+
+.checkout-summary {
+  background: var(--bg3);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin: 16px 0;
+}
+.summary-row { display: flex; justify-content: space-between; font-size: 13px; padding: 4px 0; color: var(--text2); }
+.summary-total { font-weight: 900; font-size: 18px; color: var(--orange); border-top: 2px solid var(--border); margin-top: 8px; padding-top: 8px; }
+
+.pay-btn {
+  width: 100%;
+  background: linear-gradient(90deg, var(--orange) 0%, var(--orange2) 100%);
+  color: white;
+  border: none;
+  border-radius: var(--radius);
+  padding: 15px;
+  font-size: 17px;
+  font-weight: 900;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: opacity 0.2s;
+  box-shadow: 0 4px 16px rgba(255,102,0,0.35);
+}
+.pay-btn:hover { opacity: 0.92; }
+
+/* ── REFERRAL PANEL ── */
+.ref-panel {
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  margin-bottom: 32px;
+}
+.ref-input-row { display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+.ref-input-row input {
+  flex: 1;
+  background: var(--input-bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 14px;
+  font-family: 'Nunito', sans-serif;
+  color: var(--text);
+  outline: none;
+  min-width: 180px;
+}
+.ref-input-row input:focus { border-color: var(--orange); }
+.ref-btn {
+  background: var(--orange);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 20px;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: background 0.2s;
+}
+.ref-btn:hover { background: var(--orange2); }
+.ref-link-box {
+  background: var(--bg3);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-family: monospace;
+  font-size: 13px;
+  color: var(--text);
+  word-break: break-all;
+  border: 1px dashed var(--orange);
+  margin-bottom: 12px;
+  min-height: 42px;
+  display: flex;
+  align-items: center;
+}
+.share-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+.share-btn {
+  border: none;
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: opacity 0.2s;
+}
+.share-btn:hover { opacity: 0.85; }
+.share-tg { background: #2AABEE; color: white; }
+.share-wa { background: #25D366; color: white; }
+.share-tw { background: #1DA1F2; color: white; }
+
+/* ── ADMIN PANEL (hidden by default) ── */
+#admin-panel {
+  display: none;
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 2px solid var(--orange);
+  padding: 24px;
+  box-shadow: var(--shadow);
+  margin-bottom: 32px;
+}
+#admin-panel.visible { display: block; }
+.admin-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.admin-title {
+  font-family: 'Baloo 2', cursive;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--orange);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.admin-badge {
+  background: var(--orange);
+  color: white;
+  font-size: 11px;
+  font-weight: 900;
+  border-radius: 999px;
+  padding: 2px 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.admin-tabs { display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; }
+.admin-tab {
+  background: var(--bg3);
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  color: var(--text2);
+  font-family: 'Nunito', sans-serif;
+  transition: all 0.2s;
+}
+.admin-tab.active { background: var(--orange); color: white; }
+.admin-tab-content { display: none; }
+.admin-tab-content.active { display: block; }
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.admin-stat {
+  background: var(--bg3);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  text-align: center;
+}
+.admin-stat .num { font-family: 'Baloo 2', cursive; font-size: 24px; font-weight: 800; color: var(--orange); }
+.admin-stat .lbl { font-size: 11px; color: var(--text2); font-weight: 600; margin-top: 2px; }
+
+.admin-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.admin-table th { background: var(--bg3); color: var(--text); padding: 10px 12px; text-align: left; font-weight: 800; }
+.admin-table td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--text); }
+.admin-table tr:hover td { background: var(--bg3); }
+
+.status-badge {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 11px;
+  font-weight: 800;
+}
+.status-ok { background: #E8F5E9; color: #2E7D32; }
+.status-pend { background: #FFF8E1; color: #F57F17; }
+.status-fail { background: #FFEBEE; color: #C62828; }
+[data-theme="dark"] .status-ok { background: #1B4A1D; color: #81C784; }
+[data-theme="dark"] .status-pend { background: #4A3A0A; color: #FFD54F; }
+[data-theme="dark"] .status-fail { background: #4A1212; color: #EF9A9A; }
+
+.admin-form-row { display: flex; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
+.admin-form-row input, .admin-form-row select {
+  flex: 1;
+  background: var(--input-bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 9px 12px;
+  font-size: 13px;
+  font-family: 'Nunito', sans-serif;
+  color: var(--text);
+  outline: none;
+  min-width: 140px;
+}
+.admin-form-row input:focus, .admin-form-row select:focus { border-color: var(--orange); }
+.admin-action-btn {
+  background: var(--orange);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 9px 18px;
+  font-weight: 800;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'Nunito', sans-serif;
+  transition: background 0.2s;
+}
+.admin-action-btn:hover { background: var(--orange2); }
+.admin-action-btn.danger { background: var(--red); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--bg2);
+  border-top: 2px solid var(--orange);
+  padding: 28px 16px 20px;
+  text-align: center;
+  color: var(--text2);
+  font-size: 13px;
+}
+footer a { color: var(--orange); text-decoration: none; font-weight: 700; }
+
+/* ── TOAST ── */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: #1A1A1A;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  z-index: 9999;
+  transition: transform 0.3s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  white-space: nowrap;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ── MODAL ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 5000;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 28px;
+  max-width: 420px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: var(--text2);
+}
+.modal h2 { font-family: 'Baloo 2', cursive; font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 14px; }
+
+/* ── PRODUCT DETAIL ── */
+.product-detail-img {
+  background: linear-gradient(135deg, #FF6600 0%, #FFD700 100%);
+  border-radius: var(--radius);
+  aspect-ratio: 16/9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 72px;
+  margin-bottom: 16px;
+}
+
+/* ── SECTIONS ── */
+.section { margin-bottom: 36px; }
+
+/* ── EMAIL INPUT MODAL ── */
+#admin-email-section {
+  background: var(--bg3);
+  border-radius: var(--radius-sm);
+  padding: 14px;
+  margin-bottom: 16px;
+  font-size: 13px;
+  color: var(--text2);
+  font-weight: 600;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .search-wrap { display: none; }
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .admin-stats { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <span>🔥 FLASH SALE — Até 70% OFF hoje! Blockchain · Web3 Payments · Acesso Imediato</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#">3D<span>Store</span></a>
+    <div class="search-wrap">
+      <input type="text" placeholder="Pesquisar produtos…" id="searchInput">
+      <button onclick="doSearch()">🔍</button>
+    </div>
+    <div class="nav-actions">
+      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Modo claro/escuro">🌙</button>
+      <div class="nav-links">
+        <a href="#produtos">Produtos</a>
+        <a href="#ranking">Ranking</a>
+        <a href="#checkout">Checkout</a>
+        <a href="#referral">Referências</a>
+      </div>
+      <button class="cart-btn" onclick="openCart()">🛒 <span class="cart-count" id="cartCount">0</span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">✨ Blockchain · Web3 Payments</div>
+  <h1>Master Infoprod <em>VIP</em> — Acesso Total</h1>
+  <p>Cria, vende e escala produtos digitais. Paga com TON ou USDT direto da tua wallet.</p>
+  <button class="hero-cta" onclick="scrollTo('produtos')">Ver Produtos →</button>
+</div>
+
+<!-- CATEGORIES -->
+<div class="categories">
+  <div class="categories-inner">
+    <button class="cat-btn active" onclick="filterCat('all', this)">Todos</button>
+    <button class="cat-btn" onclick="filterCat('curso', this)">📚 Cursos</button>
+    <button class="cat-btn" onclick="filterCat('pack', this)">📦 Packs</button>
+    <button class="cat-btn" onclick="filterCat('mentoria', this)">🎯 Mentorias</button>
+    <button class="cat-btn" onclick="filterCat('bonus', this)">🎁 Bónus</button>
+  </div>
+</div>
+
+<!-- FLASH SALE TIMER -->
+<div class="flash-sale">
+  ⚡ FLASH SALE termina em:
+  <div class="timer-blocks">
+    <div class="timer-block" id="th">02</div>
+    <div class="timer-sep">:</div>
+    <div class="timer-block" id="tm">59</div>
+    <div class="timer-sep">:</div>
+    <div class="timer-block" id="ts">59</div>
+  </div>
+  🔥 Preços reduzidos!
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stat-card">
+      <div class="stat-num" id="statOrders">247</div>
+      <div class="stat-label">Pedidos Totais</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="statRefs">89</div>
+      <div class="stat-label">Referências Ativas</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="statTon">1.2k</div>
+      <div class="stat-label">TON Distribuídos</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">40+</div>
+      <div class="stat-label">Aulas Disponíveis</div>
+    </div>
+  </div>
+
+  <!-- ADMIN PANEL (invisível para utilizadores comuns) -->
+  <div id="admin-panel">
+    <div class="admin-header">
+      <div class="admin-title">
+        ⚙️ Painel de Administração
+        <span class="admin-badge">ADM GERAL</span>
+      </div>
+      <div id="admin-email-section">Sessão: <strong id="adminEmailDisplay">—</strong></div>
+    </div>
+
+    <div class="admin-tabs">
+      <button class="admin-tab active" onclick="switchAdminTab('overview', this)">📊 Visão Geral</button>
+      <button class="admin-tab" onclick="switchAdminTab('orders', this)">📦 Pedidos</button>
+      <button class="admin-tab" onclick="switchAdminTab('users', this)">👥 Utilizadores</button>
+      <button class="admin-tab" onclick="switchAdminTab('products', this)">🛍️ Produtos</button>
+      <button class="admin-tab" onclick="switchAdminTab('refs', this)">🎁 Referências</button>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="admin-tab-content active" id="atab-overview">
+      <div class="admin-stats">
+        <div class="admin-stat"><div class="num">247</div><div class="lbl">Total Pedidos</div></div>
+        <div class="admin-stat"><div class="num">3.7k TON</div><div class="lbl">Receita Total</div></div>
+        <div class="admin-stat"><div class="num">89</div><div class="lbl">Refs Ativas</div></div>
+        <div class="admin-stat"><div class="num">1.2k TON</div><div class="lbl">Comissões Pagas</div></div>
+        <div class="admin-stat"><div class="num">156</div><div class="lbl">Utilizadores</div></div>
+        <div class="admin-stat"><div class="num">98.2%</div><div class="lbl">Tx. Sucesso</div></div>
+      </div>
+      <p style="color:var(--text2);font-size:13px;">📅 Última atualização: <strong id="lastUpdate">—</strong></p>
+    </div>
+
+    <!-- ORDERS -->
+    <div class="admin-tab-content" id="atab-orders">
+      <div style="overflow-x:auto;">
+        <table class="admin-table" id="ordersTable">
+          <thead><tr><th>#</th><th>Email</th><th>Produto</th><th>TON</th><th>Data</th><th>Estado</th><th>Ação</th></tr></thead>
+          <tbody id="ordersTbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- USERS -->
+    <div class="admin-tab-content" id="atab-users">
+      <div style="overflow-x:auto;">
+        <table class="admin-table" id="usersTable">
+          <thead><tr><th>Email</th><th>Pedidos</th><th>Refs</th><th>TON Ganho</th><th>Registado</th><th>Ação</th></tr></thead>
+          <tbody id="usersTbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PRODUCTS -->
+    <div class="admin-tab-content" id="atab-products">
+      <div class="admin-form-row" style="margin-bottom:16px;">
+        <input type="text" placeholder="Nome do produto" id="newProdName">
+        <input type="number" step="0.1" placeholder="Preço (TON)" id="newProdPrice">
+        <select id="newProdCat">
+          <option value="curso">Curso</option>
+          <option value="pack">Pack</option>
+          <option value="mentoria">Mentoria</option>
+          <option value="bonus">Bónus</option>
+        </select>
+        <button class="admin-action-btn" onclick="addProduct()">+ Adicionar</button>
+      </div>
+      <div style="overflow-x:auto;">
+        <table class="admin-table" id="prodTable">
+          <thead><tr><th>Nome</th><th>Preço</th><th>Categoria</th><th>Vendas</th><th>Ação</th></tr></thead>
+          <tbody id="prodTbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- REFS ADMIN -->
+    <div class="admin-tab-content" id="atab-refs">
+      <div style="overflow-x:auto;">
+        <table class="admin-table">
+          <thead><tr><th>Email</th><th>Código</th><th>Cliques</th><th>Conversões</th><th>TON Ganho</th></tr></thead>
+          <tbody id="refsTbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- END ADMIN PANEL -->
+
+  <!-- PRODUTOS -->
+  <div class="section" id="produtos">
+    <h2 class="section-title">🛍️ Produtos em Destaque</h2>
+    <div class="products-grid" id="productsGrid"></div>
+  </div>
+
+  <!-- RANKING -->
+  <div class="section" id="ranking">
+    <h2 class="section-title">🏆 Ranking Global de Referências</h2>
+    <div class="ranking-table">
+      <table>
+        <thead><tr><th>#</th><th>Utilizador</th><th>Referências</th><th>TON Ganhos</th></tr></thead>
+        <tbody id="rankingBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- REFERRAL -->
+  <div class="section" id="referral">
+    <h2 class="section-title">🎁 Programa de Referências</h2>
+    <div class="ref-panel">
+      <p style="font-size:14px;color:var(--text2);margin-bottom:12px;">Convida amigos e ganha <strong style="color:var(--orange)">0.01 TON</strong> por cada compra feita via o teu link único.</p>
+      <div class="ref-input-row">
+        <input type="email" placeholder="O teu e-mail" id="refEmail">
+        <button class="ref-btn" onclick="generateRefLink()">Gerar Link</button>
+      </div>
+      <div class="ref-link-box" id="refLinkBox">—</div>
+      <div class="share-btns">
+        <button class="share-btn share-tg" onclick="shareRef('tg')">✈️ Telegram</button>
+        <button class="share-btn share-wa" onclick="shareRef('wa')">💬 WhatsApp</button>
+        <button class="share-btn share-tw" onclick="shareRef('tw')">🐦 Twitter</button>
+        <button class="ref-btn" onclick="copyRefLink()" style="background:var(--bg3);color:var(--text)">📋 Copiar</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;" id="refStats">
+        <div class="stat-card"><div class="stat-num" id="refClicks">0</div><div class="stat-label">Cliques</div></div>
+        <div class="stat-card"><div class="stat-num" id="refConv">0</div><div class="stat-label">Conversões</div></div>
+        <div class="stat-card"><div class="stat-num" id="refEarn">0.000</div><div class="stat-label">TON Ganhos</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKOUT -->
+  <div class="section" id="checkout">
+    <h2 class="section-title">💳 Checkout Seguro</h2>
+    <div class="checkout-section">
+      <div class="form-row">
+        <label>Produto</label>
+        <select id="chkProduct" onchange="updateCheckoutTotal()">
+          <option value="1.5">Master Infoprod VIP — 1.5 TON</option>
+          <option value="3.0">Kit Lançamento Pro — 3.0 TON</option>
+          <option value="5.0">Sessão 1:1 Estratégica — 5.0 TON</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>Moeda de Pagamento</label>
+        <select id="chkCurrency">
+          <option>TON</option>
+          <option>USDT</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label>O teu e-mail (para acesso)</label>
+        <input type="email" placeholder="email@exemplo.com" id="chkEmail" oninput="checkAdminEmail()">
+      </div>
+      <div class="form-row">
+        <label>Código de Referência (opcional)</label>
+        <input type="text" placeholder="REF-XXXXX" id="chkRef">
+      </div>
+      <div class="checkout-summary">
+        <div class="summary-row"><span>Produto</span><span id="chkProdLabel">Master Infoprod VIP</span></div>
+        <div class="summary-row"><span>Referência</span><span id="chkRefLabel">—</span></div>
+        <div class="summary-row"><span>Rede</span><span>TON Blockchain</span></div>
+        <div class="summary-row"><span>Processador</span><span>xRocket Pay</span></div>
+        <div class="summary-row summary-total"><span>Total</span><span id="chkTotal">1.5 TON</span></div>
+      </div>
+      <button class="pay-btn" onclick="processPayment()">🔒 Pagar Agora →</button>
+      <p style="text-align:center;font-size:12px;color:var(--text2);margin-top:10px;">Pagamento seguro via TON Connect · xRocket</p>
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 3DStore · <a href="mailto:suporte@3dstore.ton">suporte@3dstore.ton</a></p>
+</footer>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('productModal')">✕</button>
+    <div class="product-detail-img" id="modalImg">📦</div>
+    <h2 id="modalTitle">Produto</h2>
+    <p style="color:var(--text2);font-size:14px;margin-bottom:12px;" id="modalDesc">Descrição do produto.</p>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <span class="price-main" id="modalPrice">0 TON</span>
+      <span class="price-old" id="modalOld"></span>
+      <span class="price-off" id="modalOff"></span>
+    </div>
+    <button class="pay-btn" onclick="addToCartFromModal()">🛒 Adicionar ao Carrinho</button>
+  </div>
+</div>
+
+<!-- CART MODAL -->
+<div class="modal-overlay" id="cartModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('cartModal')">✕</button>
+    <h2>🛒 Carrinho</h2>
+    <div id="cartItems" style="margin-bottom:14px;"></div>
+    <div class="summary-row summary-total" style="margin-bottom:16px;"><span>Total</span><span id="cartTotal">0 TON</span></div>
+    <button class="pay-btn" onclick="checkoutFromCart()">Finalizar Compra →</button>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+// CONFIG
+// ══════════════════════════════════════════
+const ADM_EMAILS = ['orlandojaime833@gmail.com', 'orlandojaime800@gmail.com'];
+
+let currentTheme = localStorage.getItem('theme') || 'light';
+let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+let currentModalProduct = null;
+let currentRefLink = '';
+
+// ── PRODUCTS DATA ──
+let products = JSON.parse(localStorage.getItem('products_db') || 'null') || [
+  { id: 1, name: 'Master Infoprod VIP', price: 1.5, oldPrice: 3.0, cat: 'curso', emoji: '🚀', badge: 'Bestseller', badgeType: 'hot', rating: 4.9, reviews: 312, desc: 'Curso completo: da ideia ao produto digital que vende no piloto automático.', sales: 189 },
+  { id: 2, name: 'Kit Lançamento Pro', price: 3.0, oldPrice: 5.5, cat: 'pack', emoji: '📦', badge: 'Pack', badgeType: '', rating: 4.8, reviews: 98, desc: 'Templates, scripts de vendas e funil completo pronto para usar.', sales: 47 },
+  { id: 3, name: 'Sessão 1:1 Estratégica', price: 5.0, oldPrice: 8.0, cat: 'mentoria', emoji: '🎯', badge: 'Mentoria', badgeType: '', rating: 5.0, reviews: 21, desc: '1 hora de mentoria exclusiva para validar e lançar o teu infoproduto.', sales: 11 },
+  { id: 4, name: 'Bónus: Templates Email', price: 0.5, oldPrice: 1.2, cat: 'bonus', emoji: '✉️', badge: 'Novo', badgeType: 'new', rating: 4.7, reviews: 45, desc: 'Pack de 20 templates de email marketing prontos a usar.', sales: 67 },
+];
+
+// ── ORDERS DATA ──
+let orders = JSON.parse(localStorage.getItem('orders_db') || 'null') || [
+  { id: 'ORD-001', email: 'user@email.com', product: 'Master Infoprod VIP', ton: 1.5, date: '2025-06-01', status: 'ok' },
+  { id: 'ORD-002', email: 'cliente2@email.com', product: 'Kit Lançamento Pro', ton: 3.0, date: '2025-06-02', status: 'ok' },
+  { id: 'ORD-003', email: 'novo@email.com', product: 'Sessão 1:1 Estratégica', ton: 5.0, date: '2025-06-03', status: 'pend' },
+];
+
+// ── USERS DATA ──
+let users = JSON.parse(localStorage.getItem('users_db') || 'null') || [
+  { email: 'user@email.com', orders: 2, refs: 5, earned: 0.05, date: '2025-05-20' },
+  { email: 'cliente2@email.com', orders: 1, refs: 12, earned: 0.12, date: '2025-05-22' },
+  { email: 'topref@email.com', orders: 3, refs: 31, earned: 0.31, date: '2025-05-18' },
+];
+
+// ── REFS DATA ──
+let refs = JSON.parse(localStorage.getItem('refs_db') || 'null') || [
+  { email: 'topref@email.com', code: 'REF-TOP31', clicks: 87, conv: 31, earned: 0.31 },
+  { email: 'cliente2@email.com', code: 'REF-CLI12', clicks: 33, conv: 12, earned: 0.12 },
+  { email: 'user@email.com', code: 'REF-USR05', clicks: 18, conv: 5, earned: 0.05 },
+];
+
+// ══════════════════════════════════════════
+// THEME
+// ══════════════════════════════════════════
+function applyTheme(t) {
+  document.documentElement.setAttribute('data-theme', t);
+  document.getElementById('themeBtn').textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+  currentTheme = t;
+}
+function toggleTheme() { applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); }
+applyTheme(currentTheme);
+
+// ══════════════════════════════════════════
+// ADMIN CHECK
+// ══════════════════════════════════════════
+function checkAdminEmail() {
+  const email = document.getElementById('chkEmail').value.trim().toLowerCase();
+  const panel = document.getElementById('admin-panel');
+  if (ADM_EMAILS.includes(email)) {
+    panel.classList.add('visible');
+    document.getElementById('adminEmailDisplay').textContent = email;
+    document.getElementById('lastUpdate').textContent = new Date().toLocaleString('pt-PT');
+    populateAdminTables();
+  } else {
+    panel.classList.remove('visible');
+  }
+}
+
+// Also check on page load if email stored
+(function() {
+  const stored = localStorage.getItem('adm_email');
+  if (stored && ADM_EMAILS.includes(stored)) {
+    document.getElementById('chkEmail').value = stored;
+    setTimeout(() => {
+      document.getElementById('admin-panel').classList.add('visible');
+      document.getElementById('adminEmailDisplay').textContent = stored;
+      document.getElementById('lastUpdate').textContent = new Date().toLocaleString('pt-PT');
+      populateAdminTables();
+    }, 100);
+  }
+})();
+
+document.getElementById('chkEmail').addEventListener('blur', function() {
+  if (ADM_EMAILS.includes(this.value.trim().toLowerCase())) {
+    localStorage.setItem('adm_email', this.value.trim().toLowerCase());
+  }
+});
+
+// ══════════════════════════════════════════
+// PRODUCTS
+// ══════════════════════════════════════════
+function renderProducts(list) {
+  const grid = document.getElementById('productsGrid');
+  grid.innerHTML = '';
+  list.forEach(p => {
+    const off = p.oldPrice ? Math.round((1 - p.price/p.oldPrice)*100) : 0;
+    const stars = '★'.repeat(Math.floor(p.rating)) + (p.rating % 1 >= 0.5 ? '½' : '');
+    grid.innerHTML += `
+    <div class="product-card" onclick="openProduct(${p.id})">
+      <div class="product-img">${p.emoji}</div>
+      ${p.badge ? `<div class="product-badge ${p.badgeType}">${p.badge}</div>` : ''}
+      <button class="wishlist-btn" onclick="event.stopPropagation();wishlist(${p.id})">🤍</button>
+      <div class="product-info">
+        <div class="product-name">${p.name}</div>
+        <div class="product-rating">${stars} <span>(${p.reviews})</span></div>
+        <div class="product-prices">
+          <span class="price-main">${p.price} TON</span>
+          ${p.oldPrice ? `<span class="price-old">${p.oldPrice} TON</span>` : ''}
+          ${off ? `<span class="price-off">-${off}%</span>` : ''}
+        </div>
+        <button class="add-cart-btn" onclick="event.stopPropagation();addToCart(${p.id})">Comprar</button>
+      </div>
+    </div>`;
+  });
+}
+
+function filterCat(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const filtered = cat === 'all' ? products : products.filter(p => p.cat === cat);
+  renderProducts(filtered);
+}
+
+function doSearch() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  if (!q) { renderProducts(products); return; }
+  renderProducts(products.filter(p => p.name.toLowerCase().includes(q)));
+}
+document.getElementById('searchInput').addEventListener('keyup', e => { if(e.key==='Enter') doSearch(); });
+
+function openProduct(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  currentModalProduct = p;
+  const off = p.oldPrice ? Math.round((1 - p.price/p.oldPrice)*100) : 0;
+  document.getElementById('modalImg').textContent = p.emoji;
+  document.getElementById('modalTitle').textContent = p.name;
+  document.getElementById('modalDesc').textContent = p.desc;
+  document.getElementById('modalPrice').textContent = p.price + ' TON';
+  document.getElementById('modalOld').textContent = p.oldPrice ? p.oldPrice + ' TON' : '';
+  document.getElementById('modalOff').textContent = off ? '-' + off + '%' : '';
+  document.getElementById('productModal').classList.add('open');
+}
+
+function addToCartFromModal() {
+  if (currentModalProduct) {
+    addToCart(currentModalProduct.id);
+    closeModal('productModal');
+  }
+}
+
+function wishlist(id) {
+  showToast('💖 Adicionado aos favoritos!');
+}
+
+renderProducts(products);
+
+// ══════════════════════════════════════════
+// CART
+// ══════════════════════════════════════════
+function addToCart(id) {
+  const p = products.find(x => x.id === id);
+  if (!p) return;
+  const ex = cart.find(c => c.id === id);
+  if (ex) ex.qty++;
+  else cart.push({ id, name: p.name, price: p.price, emoji: p.emoji, qty: 1 });
+  saveCart();
+  updateCartCount();
+  showToast('🛒 Adicionado ao carrinho!');
+}
+
+function saveCart() { localStorage.setItem('cart', JSON.stringify(cart)); }
+
+function updateCartCount() {
+  const total = cart.reduce((a, c) => a + c.qty, 0);
+  document.getElementById('cartCount').textContent = total;
+}
+
+function openCart() {
+  const items = document.getElementById('cartItems');
+  if (cart.length === 0) {
+    items.innerHTML = '<p style="color:var(--text2);text-align:center;padding:20px 0;">Carrinho vazio 🛒</p>';
+  } else {
+    items.innerHTML = cart.map(c => `
+      <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);">
+        <span style="font-size:24px;">${c.emoji}</span>
+        <div style="flex:1;">
+          <div style="font-weight:700;font-size:13px;">${c.name}</div>
+          <div style="color:var(--text2);font-size:12px;">${c.price} TON × ${c.qty}</div>
+        </div>
+        <span style="color:var(--orange);font-weight:800;">${(c.price * c.qty).toFixed(2)} TON</span>
+        <button onclick="removeFromCart(${c.id})" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px;">✕</button>
+      </div>`).join('');
+  }
+  const total = cart.reduce((a, c) => a + c.price * c.qty, 0);
+  document.getElementById('cartTotal').textContent = total.toFixed(2) + ' TON';
+  document.getElementById('cartModal').classList.add('open');
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(c => c.id !== id);
+  saveCart();
+  updateCartCount();
+  openCart();
+}
+
+function checkoutFromCart() {
+  closeModal('cartModal');
+  document.getElementById('checkout').scrollIntoView({ behavior: 'smooth' });
+  showToast('✅ Seleciona o produto e paga!');
+}
+
+updateCartCount();
+
+// ══════════════════════════════════════════
+// CHECKOUT
+// ══════════════════════════════════════════
+function updateCheckoutTotal() {
+  const val = document.getElementById('chkProduct').value;
+  const labels = { '1.5': 'Master Infoprod VIP', '3.0': 'Kit Lançamento Pro', '5.0': 'Sessão 1:1 Estratégica' };
+  document.getElementById('chkTotal').textContent = val + ' TON';
+  document.getElementById('chkProdLabel').textContent = labels[val] || '—';
+}
+
+function processPayment() {
+  const email = document.getElementById('chkEmail').value.trim();
+  if (!email) { showToast('⚠️ Insere o teu e-mail!'); return; }
+  showToast('🚀 A processar pagamento via xRocket...');
+  setTimeout(() => {
+    const product = document.getElementById('chkProduct').options[document.getElementById('chkProduct').selectedIndex].text;
+    const ton = parseFloat(document.getElementById('chkProduct').value);
+    const newOrder = {
+      id: 'ORD-' + String(orders.length + 1).padStart(3, '0'),
+      email, product: product.split('—')[0].trim(), ton, date: new Date().toISOString().split('T')[0], status: 'ok'
+    };
+    orders.unshift(newOrder);
+    localStorage.setItem('orders_db', JSON.stringify(orders));
+    showToast('✅ Pedido confirmado! Acesso enviado por email.');
+    populateAdminTables();
+  }, 1800);
+}
+
+// ══════════════════════════════════════════
+// REFERRAL
+// ══════════════════════════════════════════
+function generateRefLink() {
+  const email = document.getElementById('refEmail').value.trim();
+  if (!email) { showToast('⚠️ Insere o teu e-mail!'); return; }
+  const code = 'REF-' + btoa(email).replace(/[^A-Z0-9]/gi, '').slice(0, 8).toUpperCase();
+  currentRefLink = `https://3dstore.ton/?ref=${code}`;
+  document.getElementById('refLinkBox').textContent = currentRefLink;
+  const ex = refs.find(r => r.email === email);
+  if (ex) {
+    document.getElementById('refClicks').textContent = ex.clicks;
+    document.getElementById('refConv').textContent = ex.conv;
+    document.getElementById('refEarn').textContent = ex.earned.toFixed(3);
+  } else {
+    document.getElementById('refClicks').textContent = '0';
+    document.getElementById('refConv').textContent = '0';
+    document.getElementById('refEarn').textContent = '0.000';
+    refs.push({ email, code, clicks: 0, conv: 0, earned: 0 });
+    localStorage.setItem('refs_db', JSON.stringify(refs));
+  }
+  showToast('🔗 Link de referência gerado!');
+}
+
+function copyRefLink() {
+  if (!currentRefLink) { showToast('⚠️ Gera o teu link primeiro!'); return; }
+  navigator.clipboard.writeText(currentRefLink).then(() => showToast('📋 Link copiado!'));
+}
+
+function shareRef(platform) {
+  if (!currentRefLink) { showToast('⚠️ Gera o teu link primeiro!'); return; }
+  const msg = encodeURIComponent('Descobre o 3DStore — produtos digitais incríveis! ' + currentRefLink);
+  const urls = {
+    tg: `https://t.me/share/url?url=${encodeURIComponent(currentRefLink)}&text=${msg}`,
+    wa: `https://wa.me/?text=${msg}`,
+    tw: `https://twitter.com/intent/tweet?text=${msg}`
+  };
+  window.open(urls[platform], '_blank');
+}
+
+// ══════════════════════════════════════════
+// RANKING
+// ══════════════════════════════════════════
+function renderRanking() {
+  const medals = ['🥇', '🥈', '🥉'];
+  const sorted = [...refs].sort((a, b) => b.conv - a.conv);
+  const body = document.getElementById('rankingBody');
+  body.innerHTML = sorted.length === 0 ?
+    '<tr><td colspan="4" style="text-align:center;color:var(--text2);padding:20px;">Ainda sem referências. Sê o primeiro!</td></tr>' :
+    sorted.map((r, i) => `
+      <tr>
+        <td><span class="rank-medal">${medals[i] || '#' + (i+1)}</span></td>
+        <td>${maskEmail(r.email)}</td>
+        <td><strong>${r.conv}</strong> referências</td>
+        <td style="color:var(--orange);font-weight:800;">${r.earned.toFixed(3)} TON</td>
+      </tr>`).join('');
+}
+function maskEmail(e) { const [a, b] = e.split('@'); return a.slice(0,2) + '***@' + b; }
+renderRanking();
+
+// ══════════════════════════════════════════
+// ADMIN TABLES
+// ══════════════════════════════════════════
+function populateAdminTables() {
+  // Orders
+  const statusLabel = { ok: '<span class="status-badge status-ok">✅ Confirmado</span>', pend: '<span class="status-badge status-pend">⏳ Pendente</span>', fail: '<span class="status-badge status-fail">❌ Falhou</span>' };
+  document.getElementById('ordersTbody').innerHTML = orders.map(o => `
+    <tr>
+      <td><strong>${o.id}</strong></td>
+      <td>${o.email}</td>
+      <td>${o.product}</td>
+      <td style="color:var(--orange);font-weight:800;">${o.ton} TON</td>
+      <td>${o.date}</td>
+      <td>${statusLabel[o.status]}</td>
+      <td><button class="admin-action-btn danger" style="padding:4px 10px;font-size:12px;" onclick="deleteOrder('${o.id}')">Apagar</button></td>
+    </tr>`).join('');
+
+  // Users
+  document.getElementById('usersTbody').innerHTML = users.map(u => `
+    <tr>
+      <td>${u.email}</td>
+      <td>${u.orders}</td>
+      <td>${u.refs}</td>
+      <td style="color:var(--orange);font-weight:800;">${u.earned.toFixed(3)} TON</td>
+      <td>${u.date}</td>
+      <td><button class="admin-action-btn danger" style="padding:4px 10px;font-size:12px;" onclick="deleteUser('${u.email}')">Remover</button></td>
+    </tr>`).join('');
+
+  // Products
+  document.getElementById('prodTbody').innerHTML = products.map(p => `
+    <tr>
+      <td>${p.emoji} ${p.name}</td>
+      <td style="color:var(--orange);font-weight:800;">${p.price} TON</td>
+      <td>${p.cat}</td>
+      <td>${p.sales}</td>
+      <td><button class="admin-action-btn danger" style="padding:4px 10px;font-size:12px;" onclick="deleteProduct(${p.id})">Remover</button></td>
+    </tr>`).join('');
+
+  // Refs
+  document.getElementById('refsTbody').innerHTML = refs.map(r => `
+    <tr>
+      <td>${r.email}</td>
+      <td><code>${r.code}</code></td>
+      <td>${r.clicks}</td>
+      <td>${r.conv}</td>
+      <td style="color:var(--orange);font-weight:800;">${r.earned.toFixed(3)} TON</td>
+    </tr>`).join('');
+
+  renderRanking();
+}
+
+function deleteOrder(id) {
+  if (!confirm('Apagar pedido ' + id + '?')) return;
+  orders = orders.filter(o => o.id !== id);
+  localStorage.setItem('orders_db', JSON.stringify(orders));
+  populateAdminTables();
+  showToast('🗑️ Pedido apagado!');
+}
+
+function deleteUser(email) {
+  if (!confirm('Remover utilizador ' + email + '?')) return;
+  users = users.filter(u => u.email !== email);
+  localStorage.setItem('users_db', JSON.stringify(users));
+  populateAdminTables();
+  showToast('🗑️ Utilizador removido!');
+}
+
+function deleteProduct(id) {
+  if (!confirm('Remover produto?')) return;
+  products = products.filter(p => p.id !== id);
+  localStorage.setItem('products_db', JSON.stringify(products));
+  renderProducts(products);
+  populateAdminTables();
+  showToast('🗑️ Produto removido!');
+}
+
+function addProduct() {
+  const name = document.getElementById('newProdName').value.trim();
+  const price = parseFloat(document.getElementById('newProdPrice').value);
+  const cat = document.getElementById('newProdCat').value;
+  if (!name || !price) { showToast('⚠️ Preenche nome e preço!'); return; }
+  const emojis = { curso: '📚', pack: '📦', mentoria: '🎯', bonus: '🎁' };
+  const newP = { id: Date.now(), name, price, oldPrice: null, cat, emoji: emojis[cat], badge: '', badgeType: '', rating: 5.0, reviews: 0, desc: name, sales: 0 };
+  products.push(newP);
+  localStorage.setItem('products_db', JSON.stringify(products));
+  renderProducts(products);
+  populateAdminTables();
+  document.getElementById('newProdName').value = '';
+  document.getElementById('newProdPrice').value = '';
+  showToast('✅ Produto adicionado!');
+}
+
+// ══════════════════════════════════════════
+// ADMIN TABS
+// ══════════════════════════════════════════
+function switchAdminTab(tab, btn) {
+  document.querySelectorAll('.admin-tab').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('atab-' + tab).classList.add('active');
+}
+
+// ══════════════════════════════════════════
+// MODAL HELPERS
+// ══════════════════════════════════════════
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(o => o.addEventListener('click', function(e) { if(e.target===this) this.classList.remove('open'); }));
+
+// ══════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ══════════════════════════════════════════
+// SCROLL HELPER
+// ══════════════════════════════════════════
+function scrollTo(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+
+// ══════════════════════════════════════════
+// FLASH SALE TIMER
+// ══════════════════════════════════════════
+let timerSecs = 2 * 3600 + 59 * 60 + 59;
+function tickTimer() {
+  if (timerSecs <= 0) { timerSecs = 3 * 3600; }
+  const h = Math.floor(timerSecs / 3600);
+  const m = Math.floor((timerSecs % 3600) / 60);
+  const s = timerSecs % 60;
+  document.getElementById('th').textContent = String(h).padStart(2, '0');
+  document.getElementById('tm').textContent = String(m).padStart(2, '0');
+  document.getElementById('ts').textContent = String(s).padStart(2, '0');
+  timerSecs--;
+}
+tickTimer();
+setInterval(tickTimer, 1000);
+
+// ══════════════════════════════════════════
+// CHECKOUT SELECT UPDATE
+// ══════════════════════════════════════════
+document.getElementById('chkProduct').addEventListener('change', updateCheckoutTotal);
+updateCheckoutTotal();
+</script>
+</body>
+</html>
